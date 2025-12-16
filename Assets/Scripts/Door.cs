@@ -14,7 +14,7 @@ public class Door : MonoBehaviour
         }
         else if (collision.tag == "Player" && collision.transform.position.x > transform.position.x)
         {
-            cam.MoveToNewRoom(lastRoom); //test
+            cam.MoveToNewRoom(lastRoom);
         }
     }
 
