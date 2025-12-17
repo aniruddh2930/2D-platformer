@@ -4,7 +4,7 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField] private int StartingHealth;
-    private int currentHealth;
+    public float currentHealth { get; private set; }
 
     private void Start()
     {
