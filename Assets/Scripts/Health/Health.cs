@@ -19,6 +19,15 @@ public class Health : MonoBehaviour
             currentHealth=0;
         }
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            takeDamage(1);
+        }
+    }
+}
 }
 
 
