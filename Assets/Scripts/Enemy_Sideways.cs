@@ -14,11 +14,11 @@ public class Enemy_Sideways : MonoBehaviour
         rightEdge = transform.position.x + movementDistance;
         leftEdge = transform.position.x - movementDistance;
     }
-    private void OnTriggerEnter2D(Collider2D collison)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collison.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
-            collison.GetComponent<Health>().TakeDamage(damage);
+            collision.GetComponent<Health>().TakeDamage(damage);
         }
     }
 

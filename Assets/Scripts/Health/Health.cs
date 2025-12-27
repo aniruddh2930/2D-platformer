@@ -17,12 +17,16 @@ public class Health : MonoBehaviour
         currentHealth -= damage;
         if (currentHealth <= 0 && !dead)
         {
-            currentHealth=0;
-            anim.SetTrigger("Die");
+            currentHealth = 0;
             GetComponent<PlayerMovement>().enabled = false;
+            GetComponent<Animator>().SetBool("jump", false);
+            anim.SetTrigger("Die");
             dead = true;
         }
+        else if (currentHealth>0) 
+        { 
         anim.SetTrigger("Hurt");
+        }
     }
 
     private void Update()
@@ -31,6 +35,11 @@ public class Health : MonoBehaviour
         {
             TakeDamage(1);
         }
+    }
+
+    public void AddHealth(float regen)
+    {
+        currentHealth += regen;
     }
 }
 
