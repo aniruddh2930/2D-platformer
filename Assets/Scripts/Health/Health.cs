@@ -3,28 +3,33 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private int StartingHealth;
-    public float currentHealth { get; private set; }
+    public float currentHealth { get; private set; } = 3;
+    private Animator anim;
+    private bool dead = false;
 
     private void Start()
     {
-        currentHealth = StartingHealth;
+        anim = GetComponent<Animator>();
     }
 
-    private void takeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         currentHealth -= damage;
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && !dead)
         {
             currentHealth=0;
+            anim.SetTrigger("Die");
+            GetComponent<PlayerMovement>().enabled = false;
+            dead = true;
         }
+        anim.SetTrigger("Hurt");
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            takeDamage(1);
+            TakeDamage(1);
         }
     }
 }
