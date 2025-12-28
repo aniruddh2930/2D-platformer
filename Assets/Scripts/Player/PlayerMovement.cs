@@ -26,7 +26,6 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");
-        body.linearVelocity = new Vector2(horizontalInput * speed, body.linearVelocity.y);
         wallJumpCooldown -= Time.deltaTime;
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded())
@@ -51,10 +50,12 @@ public class PlayerMovement : MonoBehaviour
         if (horizontalInput > 0.01f && wallJumpCooldown<=0.0f)
         {
             transform.localScale = Vector3.one;
+            body.linearVelocity = new Vector2(horizontalInput * speed, body.linearVelocity.y);
         }
         else if (horizontalInput < -0.01f && wallJumpCooldown<=0.0f)
         {
             transform.localScale = new Vector3(-1, 1, 1);
+            body.linearVelocity = new Vector2(horizontalInput * speed, body.linearVelocity.y);
         }
         anim.SetBool("run", horizontalInput != 0);
         anim.SetBool("jump", !isGrounded());
@@ -72,10 +73,10 @@ public class PlayerMovement : MonoBehaviour
     private void wallJump()
     {
 
-        body.linearVelocity = new Vector2(-transform.localScale.x*speed*8, jumpSpeed);
+        body.linearVelocity = new Vector2(-transform.localScale.x*speed, jumpSpeed);
         transform.localScale = new Vector3(-Mathf.Sign(transform.localScale.x), 1, 1);
         anim.SetTrigger("jump");
-        wallJumpCooldown = 0.3f;
+        wallJumpCooldown = 0.15f;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {

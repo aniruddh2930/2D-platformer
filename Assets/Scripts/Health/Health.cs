@@ -7,6 +7,7 @@ public class Health : MonoBehaviour
     public float currentHealth { get; private set; } = 3;
     private Animator anim;
     private bool dead = false;
+    private bool invunerable = false;
 
     [Header("Iframes")]
     [SerializeField] float iFrameDuration;
@@ -21,8 +22,15 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        currentHealth -= damage;
-        if (currentHealth <= 0 && !dead)
+        if (dead || invunerable) return;
+
+        if (currentHealth-damage > 0)
+        {
+            invunerable = true;
+            currentHealth -= damage;
+            StartCoroutine("Invunerability");
+        }
+        else 
         {
             currentHealth = 0;
             GetComponent<PlayerMovement>().enabled = false;
@@ -30,11 +38,7 @@ public class Health : MonoBehaviour
             anim.SetTrigger("Die");
             dead = true;
         }
-        else if (currentHealth>0) 
-        { 
-            anim.SetTrigger("Hurt");
-            StartCoroutine("Invunerability");
-        }
+
     }
 
     private void Update()
@@ -62,6 +66,7 @@ public class Health : MonoBehaviour
             yield return new WaitForSeconds(iFrameDuration/(numberOfFlashes*2));
         }
         Physics2D.IgnoreLayerCollision(8, 9, false);
+        invunerable = false;
     }
 }
 
