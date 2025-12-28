@@ -41,10 +41,12 @@ public class FireTrap : MonoBehaviour
     private IEnumerator ActiveTrap()
     {
         triggered = true;
+        sprite.color = new Color(0.79f, 0.03f, 0.03f);
         yield return new WaitForSeconds(activationDelay);
         active = true;
         fireHitbox.SetActive(true);
         yield return new WaitForSeconds(activeTime);
+        sprite.color= Color.white;
         active = false;
         fireHitbox.SetActive(false);
         triggered = false;
