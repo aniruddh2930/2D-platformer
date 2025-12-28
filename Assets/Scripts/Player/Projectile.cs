@@ -57,7 +57,8 @@ public class Projectile : MonoBehaviour
         anim.SetTrigger("explode");
     }
 
-    private void Deactivate() {
+    private void Deactivate() 
+    {
         gameObject.SetActive(false);
     }
 

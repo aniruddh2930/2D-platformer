@@ -78,10 +78,6 @@ public class PlayerMovement : MonoBehaviour
         anim.SetTrigger("jump");
         wallJumpCooldown = 0.15f;
     }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-
-    }
     
     private bool isGrounded()
     {
