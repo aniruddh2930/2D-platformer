@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class Damage : MonoBehaviour
 {
-    [SerializeField] private float damage;
+    [SerializeField] protected float damage;
 
-    private void OnTriggerEnter2D(Collider2D collider)
+    protected void OnTriggerStay2D(Collider2D collider)
     {
         if (collider.CompareTag("Player"))
         {

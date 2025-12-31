@@ -2,15 +2,38 @@ using UnityEngine;
 
 public class ArrowTrap : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private float attackCooldown;
+    [SerializeField] private GameObject[] arrows;
+    [SerializeField] private Transform firePoint;
+    private float coolDown;
+
+    private void Attack()
     {
-        
+        coolDown = attackCooldown;
+        int arrow = findArrow();
+        arrows[arrow].transform.position = firePoint.position;
+        arrows[arrow].GetComponent<EnemyProjectile>().Activate();
+
     }
 
-    // Update is called once per frame
-    void Update()
+    private int findArrow()
     {
-        
+        for (int i = 0; i < arrows.Length; i++)
+        {
+            if (!arrows[i].activeInHierarchy)
+            {
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    private void Update()
+    {
+        coolDown -= Time.deltaTime;
+        if (coolDown <= 0)
+        {
+              Attack();
+        }
     }
 }

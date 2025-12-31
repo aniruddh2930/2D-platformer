@@ -1,4 +1,4 @@
-using UnityEngine;
+    using UnityEngine;
 
 public class Door : MonoBehaviour
 {
@@ -10,10 +10,14 @@ public class Door : MonoBehaviour
     { 
         if (collision.tag == "Player" && collision.transform.position.x < transform.position.x)
         {
+            nextRoom.GetComponent<Reset>().ActivateRoom(true);
+            lastRoom.GetComponent<Reset>().ActivateRoom(false);
             cam.MoveToNewRoom(nextRoom);
         }
         else if (collision.tag == "Player" && collision.transform.position.x > transform.position.x)
         {
+            nextRoom.GetComponent<Reset>().ActivateRoom(false);
+            lastRoom.GetComponent<Reset>().ActivateRoom(true);
             cam.MoveToNewRoom(lastRoom);
         }
     }
