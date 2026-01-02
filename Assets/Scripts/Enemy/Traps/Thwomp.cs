@@ -19,7 +19,7 @@ public class Thwomp : Damage
     private Vector3[] directions= new Vector3[4];
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Awake()
     {
         directions[0] = transform.right;
         directions[1] = -transform.right;
@@ -37,7 +37,7 @@ public class Thwomp : Damage
         if (attacking)
         {
             //times 50 so speed doesnt seem to large
-            rb.linearVelocity = destination.normalized *50* speed * Time.deltaTime;
+            rb.linearVelocity = destination.normalized*speed;
             CheckDistance();
         }
         else
@@ -126,6 +126,16 @@ public class Thwomp : Damage
     private void OnEnable()
     {
         Stop();
+    }
+
+    //Debugging purposes
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        for (int i = 0; i < directions.Length; i++)
+        {
+            Gizmos.DrawWireCube(box.bounds.center+new Vector3(5,0,0), box.size * transform.lossyScale);
+        }
     }
 }
 

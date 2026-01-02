@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpikeHead
   damage: 1
-  speed: 15
+  speed: 10
   range: 50
   checkDelay: 3
   playerMask:

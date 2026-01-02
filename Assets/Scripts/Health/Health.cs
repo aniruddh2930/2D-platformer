@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    public float currentHealth { get; private set; } = 3;
+    [Header("Health")]
+    [SerializeField] private float maxHealth;
+    public float currentHealth { get; private set; }
     private Animator anim;
     private bool dead = false;
     private bool invunerable = false;
@@ -14,8 +16,9 @@ public class Health : MonoBehaviour
     //number of times player turns red when taking dameage
     [SerializeField] int numberOfFlashes;
     private SpriteRenderer sprite;
-    private void Start()
+    private void Awake()
     {
+        currentHealth = maxHealth;
         anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
     }
