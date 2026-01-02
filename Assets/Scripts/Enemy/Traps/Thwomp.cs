@@ -63,7 +63,7 @@ public class Thwomp : Damage
     {
         for (int i=0;i<directions.Length;i++)
         {
-            RaycastHit2D hit = Physics2D.BoxCast(transform.position, box.size*transform.lossyScale,transform.rotation.z, directions[i],range,playerMask);
+            RaycastHit2D hit = Physics2D.BoxCast(transform.position, box.bounds.size,transform.rotation.z, directions[i],range,playerMask);
             if (hit.collider != null)
              {
                 destination = directions[i];
@@ -129,13 +129,11 @@ public class Thwomp : Damage
     }
 
     //Debugging purposes
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        for (int i = 0; i < directions.Length; i++)
-        {
-            Gizmos.DrawWireCube(box.bounds.center+new Vector3(5,0,0), box.size * transform.lossyScale);
-        }
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawWireCube(box.bounds.center, new Vector2(2*range, box.bounds.size.y));
+    //    Gizmos.DrawWireCube(box.bounds.center, new Vector2(box.bounds.size.x, 2*range));
+    //}
 }
 
