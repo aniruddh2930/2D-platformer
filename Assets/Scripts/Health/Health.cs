@@ -49,9 +49,11 @@ public class Health : MonoBehaviour
 
             //enemy
             if (GetComponent<MeleeEnemy>() != null)
-                GetComponent<MeleeEnemy>().StopAllCoroutines();
+            {
+                GetComponent<MeleeEnemy>().StopAllCoroutines(); 
                 GetComponent<MeleeEnemy>().enabled = false;
-            if (GetComponent<PlayerAttack>() != null)
+            }
+            if (GetComponentInChildren<MeleeHitbox>() != null)
                 GetComponentInChildren<MeleeHitbox>().enabled = false;
             if(GetComponent<Patrol>() != null)
                 GetComponent<Patrol>().enabled = false;
