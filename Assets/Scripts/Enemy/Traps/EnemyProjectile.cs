@@ -5,30 +5,61 @@ public class EnemyProjectile : Damage
     [SerializeField] private float speed;
     [SerializeField] private float resetTime;
     private float lifetime;
+    private Animator anim;
+    private BoxCollider2D boxCollider;
+    private bool hit = false;
+    [SerializeField] private Transform knight;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        transform.Translate(speed * Time.deltaTime,0,0);
+        anim = GetComponent<Animator>();
+        boxCollider = GetComponent<BoxCollider2D>();
+    }
+    // Update is called once per frame
+    private void Update()
+    {
+        if(hit)
+            return;
+        transform.Translate(speed * Time.deltaTime*knight.localScale.x,0,0);
         lifetime -= Time.deltaTime;  
         if (lifetime <= 0)
         {
-            gameObject.SetActive(false);
+            Deactivate();
         }
     }
 
     public void Activate()
     {
+        hit= false;
         lifetime = resetTime;
         gameObject.SetActive(true);
+        boxCollider.enabled = true;
+        transform.localScale = new Vector3(knight.localScale.x*0.7f, 0.7f, 0.7f);
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void Deactivate()
     {
-            
-        base.OnTriggerStay2D(collision);   
         gameObject.SetActive(false);
-        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+            return;
+        hit = true;
+        Debug.Log("Enemy Projectile hit " + collision.name);
+        OnTriggerStay2D(collision);
+        if (anim == null)
+        {
+            Deactivate();
+            boxCollider.enabled = false;
+        }
+
+        else
+        {
+            //explosion calls decativate
+            anim.SetTrigger("explode");
+            boxCollider.enabled = false;
+        }
     }
 }

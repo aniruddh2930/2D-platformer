@@ -16,14 +16,14 @@ public class MeleeEnemy : MonoBehaviour
 
 
     private Animator anim;
-    Patrol patrol;
+    MeleePatrol patrol;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         box= GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
-        patrol=GetComponent<Patrol>();
+        patrol=GetComponent<MeleePatrol>();
     }
 
     // Update is called once per frame

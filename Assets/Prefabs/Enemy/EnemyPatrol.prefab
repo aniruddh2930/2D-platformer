@@ -245,6 +245,7 @@ MonoBehaviour:
   maxHealth: 3
   iFrameDuration: 1
   numberOfFlashes: 3
+  components: []
 --- !u!114 &5082346663839956467
 MonoBehaviour:
   m_ObjectHideFlags: 0

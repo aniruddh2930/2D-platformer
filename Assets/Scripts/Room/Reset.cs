@@ -7,6 +7,8 @@ public class Reset : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if (enemies.Length == 1 && enemies[0]==null)
+            return;
         initialPositions = new Vector2[enemies.Length];
         for (int i = 0; i < enemies.Length; i++)
         {
@@ -17,6 +19,8 @@ public class Reset : MonoBehaviour
     // Update is called once per frame
     public void ActivateRoom(bool status)
     {
+        if (enemies.Length == 1 && enemies[0] == null)
+            return;
         for (int i= 0;i< enemies.Length; i++)
         {
             if (enemies[i] != null)

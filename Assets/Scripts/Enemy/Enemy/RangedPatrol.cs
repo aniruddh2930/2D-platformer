@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Patrol : MonoBehaviour
+public class RangedPatrol : MonoBehaviour
 {
     [Header("Patrol Points")]
     [SerializeField] private Transform leftEdge;
@@ -18,8 +18,8 @@ public class Patrol : MonoBehaviour
     [Header("Player")]
     [SerializeField] private Transform player;
     private Rigidbody2D rb;
-    private MeleeHitbox meleeHitbox;
-    private int direction=1;
+    private FirePoint firePoint;
+    private int direction = 1;
 
     private Animator anim;
     [Header("Idle Behavior")]
@@ -32,10 +32,10 @@ public class Patrol : MonoBehaviour
     private Vector2 origin;
     private float currentSpeed;
 
-    private void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        meleeHitbox = GetComponentInChildren<MeleeHitbox>();
+        firePoint = GetComponentInChildren<FirePoint>();
         anim = GetComponent<Animator>();
         box = GetComponent<BoxCollider2D>();
         origin = (leftEdge.position + rightEdge.position) / 2;
@@ -43,8 +43,8 @@ public class Patrol : MonoBehaviour
     }
     private void Update()
     {
-         if (!PlayerInSight() && !attacking)
-        { 
+        if (!PlayerInSight() && !attacking)
+        {
             if (transform.position.x < leftEdge.position.x)
             {
                 idleTime += Time.deltaTime;
@@ -79,7 +79,7 @@ public class Patrol : MonoBehaviour
             if (PlayerInSight())
             {
                 attacking = true;
-                if (Vector2.Distance(player.position, transform.position) < meleeHitbox.GetComponent<BoxCollider2D>().bounds.size.x + 0.7f)
+                if (Vector2.Distance(player.position, transform.position) < firePoint.GetComponent<BoxCollider2D>().bounds.size.x + 0.7f)
                 {
                     currentSpeed = 0;
                     anim.SetBool("moving", false);
@@ -89,9 +89,9 @@ public class Patrol : MonoBehaviour
                     currentSpeed *= 1.5f;
                     anim.SetBool("moving", true);
                 }
-                else if (currentSpeed==0)
+                else if (currentSpeed == 0)
                 {
-                    currentSpeed = speed*1.5f;
+                    currentSpeed = speed * 1.5f;
                     anim.SetBool("moving", true);
                 }
                 else
@@ -99,7 +99,7 @@ public class Patrol : MonoBehaviour
                     anim.SetBool("moving", true);
                 }
 
-                    rb.linearVelocity = Destination(1) * currentSpeed;
+                rb.linearVelocity = Destination(1) * currentSpeed;
                 if (Destination(1).x > 0)
                 {
                     transform.localScale = new Vector2(1, 1);
@@ -109,7 +109,7 @@ public class Patrol : MonoBehaviour
                     transform.localScale = new Vector2(-1, 1);
                 }
             }
-                            
+
             if (!PlayerInSight() && attacking)
             {
                 if (currentSpeed != speed)
@@ -118,7 +118,7 @@ public class Patrol : MonoBehaviour
                 }
 
                 anim.SetBool("moving", true);
-                rb.linearVelocity= Destination(2) * currentSpeed;
+                rb.linearVelocity = Destination(2) * currentSpeed;
                 if (rb.linearVelocity.x > 0)
                 {
                     transform.localScale = new Vector2(1, 1);
@@ -129,7 +129,7 @@ public class Patrol : MonoBehaviour
                     transform.localScale = new Vector2(-1, 1);
                     direction = -1;
                 }
-                if (Vector2.Distance(new Vector2(transform.position.x,origin.y),origin)<0.1f)
+                if (Vector2.Distance(new Vector2(transform.position.x, origin.y), origin) < 0.1f)
                 {
                     rb.linearVelocity = Vector2.zero;
                     attacking = false;
@@ -142,18 +142,18 @@ public class Patrol : MonoBehaviour
     private void Direction()
     {
         anim.SetBool("moving", true);
-        transform.position= new Vector2(transform.position.x+Time.deltaTime*currentSpeed*direction, transform.position.y);
+        transform.position = new Vector2(transform.position.x + Time.deltaTime * currentSpeed * direction, transform.position.y);
 
     }
 
     private Vector2 Destination(int num)
     {
         //to player
-        if (num==1)
-        return (new Vector2(player.position.x,0)-new Vector2(transform.position.x,0)).normalized;
+        if (num == 1)
+            return (new Vector2(player.position.x, 0) - new Vector2(transform.position.x, 0)).normalized;
         //to origin
-        if (num==2)
-        return (new Vector2(origin.x,0)-new Vector2(transform.position.x,0)).normalized;
+        if (num == 2)
+            return (new Vector2(origin.x, 0) - new Vector2(transform.position.x, 0)).normalized;
 
         else return Vector2.zero;
     }
@@ -166,13 +166,13 @@ public class Patrol : MonoBehaviour
 
     private bool PlayerInSight()
     {
-        RaycastHit2D hit = Physics2D.BoxCast(box.bounds.center + transform.right * range * transform.localScale.x, new Vector2(box.bounds.size.x * sizeX, box.bounds.size.y*sizeY), 0, new Vector2(transform.localScale.x, 0), transform.rotation.z, playerLayer);
+        RaycastHit2D hit = Physics2D.BoxCast(box.bounds.center + transform.right * range * transform.localScale.x, new Vector2(box.bounds.size.x * sizeX, box.bounds.size.y * sizeY), 0, new Vector2(transform.localScale.x, 0), transform.rotation.z, playerLayer);
         return hit.collider != null;
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(box.bounds.center + transform.right * range * transform.localScale.x, new Vector2(box.bounds.size.x * sizeX, box.bounds.size.y*sizeY));
+        Gizmos.DrawWireCube(box.bounds.center + transform.right * range * transform.localScale.x, new Vector2(box.bounds.size.x * sizeX, box.bounds.size.y * sizeY));
     }
 }

@@ -27,7 +27,7 @@ public class Projectile : MonoBehaviour
         cooldown = 0.0f;
         boxCollider.enabled = true; 
         hit = false;
-        transform.localScale = new Vector3(direction, 1, 1);
+        transform.localScale = new Vector3(0.7f*direction, 0.7f, 0.7f);
     }
 
     // Update is called once per frame
@@ -52,6 +52,9 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.CompareTag("Player"))
+            return;
+        Debug.Log("Projectile hit " + collision.name);
         hit = true;
         if (collision.CompareTag("Enemy"))
         {

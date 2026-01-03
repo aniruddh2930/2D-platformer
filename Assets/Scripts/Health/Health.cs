@@ -16,6 +16,9 @@ public class Health : MonoBehaviour
     //number of times player turns red when taking dameage
     [SerializeField] int numberOfFlashes;
     private SpriteRenderer sprite;
+
+    [Header("Components")]
+    [SerializeField] private Behaviour[] components;
     private void Awake()
     {
         currentHealth = maxHealth;
@@ -37,26 +40,13 @@ public class Health : MonoBehaviour
         else 
         {
             currentHealth = 0;
-            //player
-            if (GetComponent<PlayerMovement>() != null)
-                GetComponent<PlayerMovement>().enabled = false;
-            if (GetComponent<PlayerAttack>() != null)
-                GetComponent<PlayerAttack>().enabled = false;
-            if (GetComponent<PlayerAttack>() != null)
-                GetComponent<Animator>().SetBool("jump", false);
+            foreach (Behaviour component in components)
+            {
+                component.enabled = false;
+            }
+            GetComponent<Animator>().SetBool("jump", false);
             anim.SetTrigger("die");
             dead = true;
-
-            //enemy
-            if (GetComponent<MeleeEnemy>() != null)
-            {
-                GetComponent<MeleeEnemy>().StopAllCoroutines(); 
-                GetComponent<MeleeEnemy>().enabled = false;
-            }
-            if (GetComponentInChildren<MeleeHitbox>() != null)
-                GetComponentInChildren<MeleeHitbox>().enabled = false;
-            if(GetComponent<Patrol>() != null)
-                GetComponent<Patrol>().enabled = false;
         }
 
     }
@@ -87,6 +77,11 @@ public class Health : MonoBehaviour
         }
         Physics2D.IgnoreLayerCollision(8, 9, false);
         invunerable = false;
+    }
+
+    private void Deactivate()
+    {
+        gameObject.SetActive(false);
     }
 }
 

@@ -19,13 +19,13 @@ public class RangedEnemy : MonoBehaviour
 
 
     private Animator anim;
-    Patrol patrol;
+    RangedPatrol patrol;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         box = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
-        patrol = GetComponent<Patrol>();
+        patrol = GetComponent<RangedPatrol>();
     }
 
     // Update is called once per frame
@@ -40,10 +40,17 @@ public class RangedEnemy : MonoBehaviour
         {
             cooldownTimer = attackCooldown;
             anim.SetTrigger("cast");
-            fireballs[findFireball()].transform.position = firePoint.position;
-            fireballs[findFireball()].GetComponent<EnemyProjectile>().Activate() ;
-            patrol.enabled = false;
         }
+    }
+    
+    //called by animation event in cast
+    private void CastFireball()
+    {
+        int index=findFireball();
+        fireballs[index].transform.position = firePoint.position;
+        fireballs[index].GetComponent<EnemyProjectile>().Activate();
+        patrol.enabled = false;
+        StartCoroutine(EnablePatrol());
     }
 
     private int findFireball()
@@ -58,11 +65,6 @@ public class RangedEnemy : MonoBehaviour
         return 0;
     }
 
-    //called from animationevent
-    private void DamagePlayer()
-    {
-       
-    }
 
     private IEnumerator EnablePatrol()
     {
