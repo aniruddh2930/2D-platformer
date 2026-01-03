@@ -1982,7 +1982,7 @@ GameObject:
   - component: {fileID: 518340341}
   - component: {fileID: 518340342}
   m_Layer: 10
-  m_Name: HitBox
+  m_Name: Firepoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2058,9 +2058,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 518340339}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36c02ccabb25f7340b99e31bc74a1855, type: 3}
+  m_Script: {fileID: 11500000, guid: cc55579c822a6434ba0102d77368a7b4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MeleeHitbox
+  m_EditorClassIdentifier: Assembly-CSharp::FirePoint
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2315,7 +2315,7 @@ GameObject:
   m_Component:
   - component: {fileID: 578175686}
   m_Layer: 0
-  m_Name: EnemyPatrol
+  m_Name: RangedPatrol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5237,9 +5237,9 @@ GameObject:
   - component: {fileID: 1077176740}
   - component: {fileID: 1077176744}
   - component: {fileID: 1077176743}
-  - component: {fileID: 1077176745}
   - component: {fileID: 1077176747}
   - component: {fileID: 1077176746}
+  - component: {fileID: 1077176748}
   m_Layer: 9
   m_Name: Knight
   m_TagString: Enemy
@@ -5317,7 +5317,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 84ce2f114ad12bd4ebafc77060220324, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9433962, g: 0.3960484, b: 0.3960484, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -5404,24 +5404,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.7013917, y: 1.3235167}
   m_EdgeRadius: 0
---- !u!114 &1077176745
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1077176739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4489631e39f241a46bd9e93ed6e4ced1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MeleeEnemy
-  attackCooldown: 2
-  damage: 1
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  meleeHitbox: {fileID: 518340341}
 --- !u!50 &1077176746
 Rigidbody2D:
   serializedVersion: 5
@@ -5472,6 +5454,25 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
+--- !u!114 &1077176748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077176739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c09a8fc29f86bc44893f1625f3f32e8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RangedEnemy
+  attackCooldown: 2
+  damage: 1
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  firePoint: {fileID: 518340340}
+  fireballs: []
 --- !u!1 &1119723620
 GameObject:
   m_ObjectHideFlags: 0

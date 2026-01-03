@@ -31,15 +31,30 @@ public class Health : MonoBehaviour
         {
             invunerable = true;
             currentHealth -= damage;
+            anim.SetTrigger("hurt");
             StartCoroutine("Invunerability");
         }
         else 
         {
             currentHealth = 0;
-            GetComponent<PlayerMovement>().enabled = false;
-            GetComponent<Animator>().SetBool("jump", false);
-            anim.SetTrigger("Die");
+            //player
+            if (GetComponent<PlayerMovement>() != null)
+                GetComponent<PlayerMovement>().enabled = false;
+            if (GetComponent<PlayerAttack>() != null)
+                GetComponent<PlayerAttack>().enabled = false;
+            if (GetComponent<PlayerAttack>() != null)
+                GetComponent<Animator>().SetBool("jump", false);
+            anim.SetTrigger("die");
             dead = true;
+
+            //enemy
+            if (GetComponent<MeleeEnemy>() != null)
+                GetComponent<MeleeEnemy>().StopAllCoroutines();
+                GetComponent<MeleeEnemy>().enabled = false;
+            if (GetComponent<PlayerAttack>() != null)
+                GetComponentInChildren<MeleeHitbox>().enabled = false;
+            if(GetComponent<Patrol>() != null)
+                GetComponent<Patrol>().enabled = false;
         }
 
     }

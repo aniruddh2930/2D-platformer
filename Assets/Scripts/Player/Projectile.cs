@@ -53,6 +53,10 @@ public class Projectile : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         hit = true;
+        if (collision.CompareTag("Enemy"))
+        {
+            collision.GetComponent<Health>().TakeDamage(1);
+        }
         boxCollider.enabled = false;
         anim.SetTrigger("explode");
     }

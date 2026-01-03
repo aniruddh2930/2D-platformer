@@ -1089,10 +1089,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fireball (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 8452948368389401271, guid: 00b80c0c32904a143b054dfc01ccf767, type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
     - target: {fileID: 8975878241663768771, guid: 00b80c0c32904a143b054dfc01ccf767, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.07080996
@@ -1641,10 +1637,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fireball (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 8452948368389401271, guid: 00b80c0c32904a143b054dfc01ccf767, type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
     - target: {fileID: 8975878241663768771, guid: 00b80c0c32904a143b054dfc01ccf767, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.07080996
@@ -1981,7 +1973,7 @@ GameObject:
   - component: {fileID: 518340340}
   - component: {fileID: 518340341}
   - component: {fileID: 518340342}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: HitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5418,10 +5410,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MeleeEnemy
   attackCooldown: 2
   damage: 1
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  meleeHitbox: {fileID: 518340341}
 --- !u!50 &1077176746
 Rigidbody2D:
   serializedVersion: 5
@@ -5446,7 +5434,7 @@ Rigidbody2D:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 0
-  m_SleepingMode: 0
+  m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!114 &1077176747
@@ -5464,8 +5452,7 @@ MonoBehaviour:
   leftEdge: {fileID: 379303129}
   rightEdge: {fileID: 1050717836}
   range: 2.5
-  sizeX: 10
-  sizeY: 3
+  size: 10
   speed: 2
   player: {fileID: 641298000}
   idleDuration: 2
@@ -5753,10 +5740,6 @@ PrefabInstance:
     - target: {fileID: 8452948368389401271, guid: 00b80c0c32904a143b054dfc01ccf767, type: 3}
       propertyPath: m_Name
       value: Fireball (8)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8452948368389401271, guid: 00b80c0c32904a143b054dfc01ccf767, type: 3}
-      propertyPath: m_Layer
-      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8975878241663768771, guid: 00b80c0c32904a143b054dfc01ccf767, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6468,10 +6451,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fireball (7)
       objectReference: {fileID: 0}
-    - target: {fileID: 8452948368389401271, guid: 00b80c0c32904a143b054dfc01ccf767, type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
     - target: {fileID: 8975878241663768771, guid: 00b80c0c32904a143b054dfc01ccf767, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.07080996
@@ -6899,10 +6878,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fireball (6)
       objectReference: {fileID: 0}
-    - target: {fileID: 8452948368389401271, guid: 00b80c0c32904a143b054dfc01ccf767, type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
     - target: {fileID: 8975878241663768771, guid: 00b80c0c32904a143b054dfc01ccf767, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.07080996
@@ -7231,7 +7206,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1509397084}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Fireball Holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7274,10 +7249,6 @@ PrefabInstance:
     - target: {fileID: 8452948368389401271, guid: 00b80c0c32904a143b054dfc01ccf767, type: 3}
       propertyPath: m_Name
       value: Fireball (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8452948368389401271, guid: 00b80c0c32904a143b054dfc01ccf767, type: 3}
-      propertyPath: m_Layer
-      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8975878241663768771, guid: 00b80c0c32904a143b054dfc01ccf767, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7616,10 +7587,6 @@ PrefabInstance:
     - target: {fileID: 8452948368389401271, guid: 00b80c0c32904a143b054dfc01ccf767, type: 3}
       propertyPath: m_Name
       value: Fireball (5)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8452948368389401271, guid: 00b80c0c32904a143b054dfc01ccf767, type: 3}
-      propertyPath: m_Layer
-      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8975878241663768771, guid: 00b80c0c32904a143b054dfc01ccf767, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8482,10 +8449,6 @@ PrefabInstance:
     - target: {fileID: 8452948368389401271, guid: 00b80c0c32904a143b054dfc01ccf767, type: 3}
       propertyPath: m_Name
       value: Fireball (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8452948368389401271, guid: 00b80c0c32904a143b054dfc01ccf767, type: 3}
-      propertyPath: m_Layer
-      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8975878241663768771, guid: 00b80c0c32904a143b054dfc01ccf767, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9437,10 +9400,6 @@ PrefabInstance:
     - target: {fileID: 8452948368389401271, guid: 00b80c0c32904a143b054dfc01ccf767, type: 3}
       propertyPath: m_Name
       value: Fireball (9)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8452948368389401271, guid: 00b80c0c32904a143b054dfc01ccf767, type: 3}
-      propertyPath: m_Layer
-      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8975878241663768771, guid: 00b80c0c32904a143b054dfc01ccf767, type: 3}
       propertyPath: m_LocalPosition.x

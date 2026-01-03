@@ -5,7 +5,6 @@ public class MeleeHitbox : MonoBehaviour
     private MeleeEnemy meleeEnemy;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private Collider2D hitbox;
-
     private void Start()
     {
         meleeEnemy = GetComponentInParent<MeleeEnemy>();
@@ -15,6 +14,7 @@ public class MeleeHitbox : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         meleeEnemy.PlayerInRange();
+        
     }
     public float GetRange()
     {

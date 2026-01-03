@@ -1,35 +1,37 @@
+using NUnit.Framework;
 using System;
 using System.Collections;
 using UnityEngine;
 
-public class MeleeEnemy : MonoBehaviour
+public class RangedEnemy : MonoBehaviour
 {
     [Header("Attack Parameters")]
     [SerializeField] private float attackCooldown;
     [SerializeField] private float damage;
     [SerializeField] private LayerMask playerLayer;
-    private float cooldownTimer=0;
+    private float cooldownTimer = 0;
     private BoxCollider2D box;
 
-    [Header("Melee Hitbox")]
-    [SerializeField] private BoxCollider2D meleeHitbox;
+    [Header("Ranged Attack")]
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private GameObject[] fireballs;
+
 
 
     private Animator anim;
     Patrol patrol;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        box= GetComponent<BoxCollider2D>();
+        box = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
-        patrol=GetComponent<Patrol>();
+        patrol = GetComponent<Patrol>();
     }
 
     // Update is called once per frame
     void Update()
     {
-       cooldownTimer -= Time.deltaTime;
+        cooldownTimer -= Time.deltaTime;
     }
 
     public void PlayerInRange()
@@ -37,32 +39,40 @@ public class MeleeEnemy : MonoBehaviour
         if (cooldownTimer <= 0)
         {
             cooldownTimer = attackCooldown;
-            anim.SetTrigger("attack");
+            anim.SetTrigger("cast");
+            fireballs[findFireball()].transform.position = firePoint.position;
+            fireballs[findFireball()].GetComponent<EnemyProjectile>().Activate() ;
             patrol.enabled = false;
         }
     }
 
+    private int findFireball()
+    {
+        for (int i = 0; i < fireballs.Length; i++)
+        {
+            if (!fireballs[i].activeInHierarchy)
+            {
+                return i;
+            }
+        }
+        return 0;
+    }
 
     //called from animationevent
     private void DamagePlayer()
     {
-        if (Physics2D.OverlapBox(meleeHitbox.bounds.center,meleeHitbox.bounds.size,0,playerLayer)!=null)
-        {
-            Physics2D.OverlapBox(meleeHitbox.bounds.center, meleeHitbox.bounds.size, 0,playerLayer).GetComponent<Health>().TakeDamage(damage);
-        }
-        StartCoroutine(EnablePatrol());
+       
     }
 
-    private  IEnumerator EnablePatrol()
+    private IEnumerator EnablePatrol()
     {
         yield return new WaitForSeconds(attackCooldown);
         patrol.enabled = true;
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(meleeHitbox.bounds.center, meleeHitbox.bounds.size);
-    }
+
+
+
+
 
 }
