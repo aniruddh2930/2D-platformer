@@ -18,6 +18,9 @@ public class Thwomp : Damage
 
     private Vector3[] directions= new Vector3[4];
 
+    [Header("SFX")]
+    [SerializeField] private AudioClip thwompSound;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
@@ -111,7 +114,7 @@ public class Thwomp : Damage
                 transform.Translate(0, 0.2f, 0);
             }
         }
-
+        AudioManager.instance.PlaySound(thwompSound);
         Stop();
     }
 

@@ -9,6 +9,8 @@ public class RangedEnemy : MonoBehaviour
     [SerializeField] private float attackCooldown;
     [SerializeField] private float damage;
     [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private AudioClip fireballHit;
+    [SerializeField] private Health playerHealth;
     private float cooldownTimer = 0;
     private BoxCollider2D box;
 
@@ -36,9 +38,10 @@ public class RangedEnemy : MonoBehaviour
 
     public void PlayerInRange()
     {
-        if (cooldownTimer <= 0)
+        if (cooldownTimer <= 0 && playerHealth.currentHealth>0)
         {
             cooldownTimer = attackCooldown;
+            AudioManager.instance.PlaySound(fireballHit);
             anim.SetTrigger("cast");
         }
     }

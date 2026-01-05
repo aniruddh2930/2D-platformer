@@ -13,6 +13,9 @@ public class FireTrap : MonoBehaviour
     private SpriteRenderer sprite;
     private bool active;
     private bool triggered;
+
+    [Header ("SFX")]
+    [SerializeField] private AudioClip fireTrapSound;
     //make it read only
     public float Damage => damage;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -51,6 +54,7 @@ public class FireTrap : MonoBehaviour
         anim.SetBool("activated", false);
         anim.SetBool("fire", true);
         fireHitbox.SetActive(true);
+        AudioManager.instance.PlaySound(fireTrapSound);
         yield return new WaitForSeconds(activeTime);
         //stop firing
         active = false;

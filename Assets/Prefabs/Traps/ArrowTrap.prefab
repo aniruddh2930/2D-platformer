@@ -118,6 +118,7 @@ MonoBehaviour:
   - {fileID: 688366173413640783}
   - {fileID: 2670435121579416413}
   firePoint: {fileID: 1979128126314487461}
+  arrowSound: {fileID: 8300000, guid: d651a125388367a44bd25e1c24fc9826, type: 3}
 --- !u!1 &3591999933241670785
 GameObject:
   m_ObjectHideFlags: 0

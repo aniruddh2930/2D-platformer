@@ -10,6 +10,7 @@ public class PlayerAttack : MonoBehaviour
     // where the projectile will be instantiated
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject[] fireballs;
+    [SerializeField] private AudioClip fireballHit;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -30,8 +31,9 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    private void Attack() {
-
+    private void Attack() 
+    {
+        AudioManager.instance.PlaySound(fireballHit);
         anim.SetTrigger("attack");
         cooldownTimer = playerAttackCooldown;
         int fireball = GetFireball();

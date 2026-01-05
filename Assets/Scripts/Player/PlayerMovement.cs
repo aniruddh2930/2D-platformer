@@ -14,6 +14,9 @@ public class PlayerMovement : MonoBehaviour
     private float wallJumpCooldown;
     private float horizontalInput;
 
+    [Header ("SFX")]
+    [SerializeField] private AudioClip jumpSound;
+
 
     private void Awake()
     {
@@ -68,6 +71,8 @@ public class PlayerMovement : MonoBehaviour
 
         body.linearVelocity = new Vector2(body.linearVelocity.x, jumpSpeed);
         anim.SetTrigger("jump");
+        AudioManager.instance.PlaySound(jumpSound);
+
     }
 
     private void wallJump()
@@ -77,6 +82,7 @@ public class PlayerMovement : MonoBehaviour
         transform.localScale = new Vector3(-Mathf.Sign(transform.localScale.x), 1, 1);
         anim.SetTrigger("jump");
         wallJumpCooldown = 0.15f;
+        AudioManager.instance.PlaySound(jumpSound);
     }
     
     private bool isGrounded()

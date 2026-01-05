@@ -243,6 +243,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   maxHealth: 3
+  death: {fileID: 8300000, guid: d9e7c95d4359ff24a8e425733fa19955, type: 3}
+  hurt: {fileID: 8300000, guid: 52bafa4110ad7cc4e85eb8d75115ba07, type: 3}
   iFrameDuration: 1
   numberOfFlashes: 3
   components: []
@@ -260,10 +262,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MeleeEnemy
   attackCooldown: 2
   damage: 1
+  playerHealth: {fileID: 0}
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
   meleeHitbox: {fileID: 1896794490268881236}
+  swordHit: {fileID: 8300000, guid: 0b5b18f00618ff64c89f2b5a535a024c, type: 3}
 --- !u!114 &7473414473534206806
 MonoBehaviour:
   m_ObjectHideFlags: 0

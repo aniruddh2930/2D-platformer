@@ -54,7 +54,6 @@ public class Projectile : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
             return;
-        Debug.Log("Projectile hit " + collision.name);
         hit = true;
         if (collision.CompareTag("Enemy"))
         {

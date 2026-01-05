@@ -7,6 +7,7 @@ public class MeleeEnemy : MonoBehaviour
     [Header("Attack Parameters")]
     [SerializeField] private float attackCooldown;
     [SerializeField] private float damage;
+    [SerializeField] private Health playerHealth;
     [SerializeField] private LayerMask playerLayer;
     private float cooldownTimer=0;
     private BoxCollider2D box;
@@ -17,6 +18,7 @@ public class MeleeEnemy : MonoBehaviour
 
     private Animator anim;
     MeleePatrol patrol;
+    [SerializeField] private AudioClip swordHit;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -34,9 +36,10 @@ public class MeleeEnemy : MonoBehaviour
 
     public void PlayerInRange()
     {
-        if (cooldownTimer <= 0)
+        if (cooldownTimer <= 0 && playerHealth.currentHealth>0)
         {
             cooldownTimer = attackCooldown;
+            AudioManager.instance.PlaySound(swordHit);
             anim.SetTrigger("attack");
             patrol.enabled = false;
         }

@@ -300,6 +300,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   maxHealth: 3
+  death: {fileID: 8300000, guid: d9e7c95d4359ff24a8e425733fa19955, type: 3}
+  hurt: {fileID: 8300000, guid: 52bafa4110ad7cc4e85eb8d75115ba07, type: 3}
   iFrameDuration: 1
   numberOfFlashes: 3
   components:
@@ -349,6 +351,8 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
+  fireballHit: {fileID: 8300000, guid: 62e3509282ef302428267080f7c1da85, type: 3}
+  playerHealth: {fileID: 0}
   firePoint: {fileID: 5456802176916814110}
   fireballs:
   - {fileID: 395281433689028439}

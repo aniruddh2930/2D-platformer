@@ -186,6 +186,7 @@ MonoBehaviour:
   playerMask:
     serializedVersion: 2
     m_Bits: 256
+  thwompSound: {fileID: 8300000, guid: 5c5ee9f0409ca044f904917ca4b0ccc4, type: 3}
 --- !u!95 &4320894528671323662
 Animator:
   serializedVersion: 7

@@ -105,6 +105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthContainer
   regen: 1
+  pickupSound: {fileID: 8300000, guid: a86e98a06ac695a4a88b677103250b4c, type: 3}
 --- !u!61 &362693712359700856
 BoxCollider2D:
   m_ObjectHideFlags: 0

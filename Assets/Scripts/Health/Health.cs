@@ -10,6 +10,8 @@ public class Health : MonoBehaviour
     private Animator anim;
     private bool dead = false;
     private bool invunerable = false;
+    [SerializeField] private AudioClip death;
+    [SerializeField] private AudioClip hurt;
 
     [Header("Iframes")]
     [SerializeField] float iFrameDuration;
@@ -35,6 +37,7 @@ public class Health : MonoBehaviour
             invunerable = true;
             currentHealth -= damage;
             anim.SetTrigger("hurt");
+            AudioManager.instance.PlaySound(hurt);
             StartCoroutine("Invunerability");
         }
         else 
@@ -46,6 +49,7 @@ public class Health : MonoBehaviour
             }
             GetComponent<Animator>().SetBool("jump", false);
             anim.SetTrigger("die");
+            AudioManager.instance.PlaySound(death);
             dead = true;
         }
 
