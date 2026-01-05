@@ -9,7 +9,7 @@ public class AudioManager : MonoBehaviour
     {
         source = GetComponent<AudioSource>();
         if (instance==null)
-        {
+        {   
             instance = this;
             DontDestroyOnLoad(gameObject);
         }

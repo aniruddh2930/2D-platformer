@@ -47,7 +47,6 @@ public class EnemyProjectile : Damage
         if (collision.CompareTag("Enemy"))
             return;
         hit = true;
-        Debug.Log("Enemy Projectile hit " + collision.name);
         OnTriggerStay2D(collision);
         if (anim == null)
         {

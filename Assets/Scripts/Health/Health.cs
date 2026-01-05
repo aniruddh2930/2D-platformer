@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Runtime.CompilerServices;
 using UnityEngine;
@@ -43,16 +44,24 @@ public class Health : MonoBehaviour
         else 
         {
             currentHealth = 0;
-            foreach (Behaviour component in components)
-            {
-                component.enabled = false;
-            }
             GetComponent<Animator>().SetBool("grounded", true);
             anim.SetTrigger("die");
             AudioManager.instance.PlaySound(death);
             dead = true;
+
+            foreach (Behaviour component in components)
+            {
+                component.enabled = false;
+            }
+            StartCoroutine(EnableRespawn());
         }
 
+    }
+
+    private IEnumerator EnableRespawn()
+    {
+        yield return new WaitForSeconds(2.0f);
+        GetComponent<PlayerRespawn>().enabled = true;
     }
 
     private void Update()
@@ -83,9 +92,27 @@ public class Health : MonoBehaviour
         invunerable = false;
     }
 
+    public void Respawn()
+    {
+        dead = false;
+        AddHealth(maxHealth);
+        GetComponent<Animator>().SetBool("grounded", true);
+        anim.Play("Player_respawn");
+    }
+
     private void Deactivate()
     {
         gameObject.SetActive(false);
+    }
+
+    //called by Player_respawn animation event
+    private void EnableComponents()
+    {
+        foreach (Behaviour component in components)
+        {
+            component.enabled = true;
+        }
+        StartCoroutine(Invunerability());
     }
 }
 

@@ -32,6 +32,9 @@ public class PlayerMovement : MonoBehaviour
     [Header ("SFX")]
     [SerializeField] private AudioClip jumpSound;
 
+    [Header("Physics Materials")]
+    [SerializeField] private PhysicsMaterial2D friction;
+    [SerializeField] private PhysicsMaterial2D noFriction;
 
     private void Awake()
     {
@@ -80,6 +83,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (isOnWall())
         {
+            body.sharedMaterial = noFriction;
             jumpsLeft = numberOfJumps;
             body.gravityScale = 0.5f;
         }
@@ -88,6 +92,7 @@ public class PlayerMovement : MonoBehaviour
             body.gravityScale = 3;
             if (isGrounded())
             {
+                body.sharedMaterial = friction;
                 jumpsLeft = numberOfJumps;
                 coyoteCounter = coyoteTime;
             }
