@@ -47,7 +47,7 @@ public class Health : MonoBehaviour
             {
                 component.enabled = false;
             }
-            GetComponent<Animator>().SetBool("jump", false);
+            GetComponent<Animator>().SetBool("grounded", true);
             anim.SetTrigger("die");
             AudioManager.instance.PlaySound(death);
             dead = true;

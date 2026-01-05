@@ -11,6 +11,21 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
 
+    [Header ("Coyote Time")]
+    [SerializeField] private float coyoteTime;
+    private float coyoteCounter;
+
+    [Header ("Multiple Jumps")]
+    [SerializeField] private int numberOfJumps;
+    // power of each jump weakens by this factor
+    [SerializeField] [Range(0.0f,1.0f)] private float jumpPowerDampen;
+    private int jumpsLeft;
+
+    [Header("Wall Jump")]
+    [SerializeField] private float wallJumpSpeedX;
+    [SerializeField] private float wallJumpSpeedY;
+    [SerializeField] private float wallJumpTimer;
+
     private float wallJumpCooldown;
     private float horizontalInput;
 
@@ -20,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        jumpsLeft = numberOfJumps;
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
@@ -30,25 +46,6 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalInput = Input.GetAxis("Horizontal");
         wallJumpCooldown -= Time.deltaTime;
-
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded())
-        {
-            jump();
-        }
-        else if (Input.GetKeyDown(KeyCode.Space) && isOnWall() && !isGrounded())
-        {
-            body.gravityScale=0.1f;
-            if (wallJumpCooldown <= 0.0f)
-            {
-                wallJump();
-            }
-        }
-        else
-        {
-            body.gravityScale = 3.0f;
-        }
-
-    
         //makes character face right direction when moving
         if (horizontalInput > 0.01f && wallJumpCooldown<=0.0f)
         {
@@ -61,16 +58,55 @@ public class PlayerMovement : MonoBehaviour
             body.linearVelocity = new Vector2(horizontalInput * speed, body.linearVelocity.y);
         }
         anim.SetBool("run", horizontalInput != 0);
-        anim.SetBool("jump", !isGrounded());
+        anim.SetBool("grounded",isGrounded());
+        bool onWall = isOnWall();
+        //jump
+        if (Input.GetKeyDown(KeyCode.W) && !onWall && ((isGrounded() || coyoteCounter>0) || jumpsLeft>0))
+        {
+            jump();
+        }
+
+        //wall jump
+        else if (Input.GetKeyDown(KeyCode.W) && onWall && wallJumpCooldown<=0.0f && jumpsLeft>0)
+        {
+            wallJump();
+        }
+
+        //adjustable jump
+        if (Input.GetKeyUp(KeyCode.W) && body.linearVelocityY>0)
+        {
+            body.linearVelocityY = body.linearVelocityY/2;
+        }
+
+        if (isOnWall())
+        {
+            jumpsLeft = numberOfJumps;
+            body.gravityScale = 0.5f;
+        }
+        else
+        {
+            body.gravityScale = 3;
+            if (isGrounded())
+            {
+                jumpsLeft = numberOfJumps;
+                coyoteCounter = coyoteTime;
+            }
+            else
+            {
+                coyoteCounter -= Time.deltaTime;
+            }
+        }
 
 
     }
 
+    
+
     private void jump()
     {
-
-        body.linearVelocity = new Vector2(body.linearVelocity.x, jumpSpeed);
-        anim.SetTrigger("jump");
+        coyoteCounter = coyoteTime;
+        body.linearVelocity = new Vector2(body.linearVelocity.x, jumpSpeed*Mathf.Pow(jumpPowerDampen,(float)(numberOfJumps-jumpsLeft)));
+        jumpsLeft--;
         AudioManager.instance.PlaySound(jumpSound);
 
     }
@@ -78,10 +114,10 @@ public class PlayerMovement : MonoBehaviour
     private void wallJump()
     {
 
-        body.linearVelocity = new Vector2(-transform.localScale.x*speed, jumpSpeed);
+        body.linearVelocity = new Vector2(-transform.localScale.x*wallJumpSpeedX, wallJumpSpeedY);
         transform.localScale = new Vector3(-Mathf.Sign(transform.localScale.x), 1, 1);
-        anim.SetTrigger("jump");
-        wallJumpCooldown = 0.15f;
+        wallJumpCooldown = wallJumpTimer;
+        jumpsLeft--;
         AudioManager.instance.PlaySound(jumpSound);
     }
     
@@ -97,7 +133,8 @@ public class PlayerMovement : MonoBehaviour
         return raycastHit.collider != null;
     }
 
-    public bool canAttack() {
+    public bool canAttack() 
+    {
         return Mathf.Abs(horizontalInput)<0.3f && isGrounded() && !isOnWall();
     }
 }

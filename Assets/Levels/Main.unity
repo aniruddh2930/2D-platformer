@@ -1951,6 +1951,37 @@ MonoBehaviour:
   player: {fileID: 641298000}
   playertime: 0.2
   distanceAhead: 3
+--- !u!1 &541911105
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 541911106}
+  m_Layer: 0
+  m_Name: LoadingManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &541911106
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 541911105}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.6834, y: 0.47492, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &577267944
 GameObject:
   m_ObjectHideFlags: 0
@@ -10073,6 +10104,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1081590589268467400, guid: 23c44aa9c12e41545a7bd2d1e801c054, type: 3}
+      propertyPath: numberOfJumps
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1081590589268467400, guid: 23c44aa9c12e41545a7bd2d1e801c054, type: 3}
+      propertyPath: wallJumpTimer
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1081590589268467400, guid: 23c44aa9c12e41545a7bd2d1e801c054, type: 3}
+      propertyPath: wallJumpSpeedX
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1081590589268467400, guid: 23c44aa9c12e41545a7bd2d1e801c054, type: 3}
+      propertyPath: wallJumpSpeedY
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1933881883902674450, guid: 23c44aa9c12e41545a7bd2d1e801c054, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.47
@@ -10117,6 +10164,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerHolder
       objectReference: {fileID: 0}
+    - target: {fileID: 9152991859131782075, guid: 23c44aa9c12e41545a7bd2d1e801c054, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 05e9fe926c4b58b469ef7ebbf10a1259, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10132,3 +10183,4 @@ SceneRoots:
   - {fileID: 1254754531}
   - {fileID: 8313406095515067399}
   - {fileID: 775155310}
+  - {fileID: 541911106}
