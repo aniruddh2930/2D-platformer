@@ -64,19 +64,20 @@ public class PlayerMovement : MonoBehaviour
         anim.SetBool("grounded",isGrounded());
         bool onWall = isOnWall();
         //jump
-        if (Input.GetKeyDown(KeyCode.W) && !onWall && ((isGrounded() || coyoteCounter>0) || jumpsLeft>0))
+        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) && !onWall && ((isGrounded() || coyoteCounter>0) || jumpsLeft>0))
         {
             jump();
         }
 
+
         //wall jump
-        else if (Input.GetKeyDown(KeyCode.W) && onWall && wallJumpCooldown<=0.0f && jumpsLeft>0)
+        else if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) && onWall && wallJumpCooldown<=0.0f && jumpsLeft>0)
         {
             wallJump();
         }
 
         //adjustable jump
-        if (Input.GetKeyUp(KeyCode.W) && body.linearVelocityY>0)
+        if ((Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.Space)) && body.linearVelocityY>0)
         {
             body.linearVelocityY = body.linearVelocityY/2;
         }

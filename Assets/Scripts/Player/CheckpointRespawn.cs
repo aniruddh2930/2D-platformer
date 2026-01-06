@@ -3,21 +3,32 @@ using UnityEngine;
 public class CheckpointRespawn : MonoBehaviour
 {
     [SerializeField] private AudioClip checkpointHit;
-    private Transform currentRespawn;
+    public Transform currentRespawn { get; private set; }
     private Health playerHealth;
-
+    private UIManager uiManager;
 
     private void Awake()
     {
         playerHealth = GetComponent<Health>();
+        uiManager=FindFirstObjectByType<UIManager>();
     }
     public void Respawn()
     {
-        transform.position=currentRespawn.position;
-        playerHealth.Respawn();
+        if (currentRespawn == null)
+        {
+            uiManager.GameOver();
+        }
 
-        //make sure the checkpoint object is a child of the room it is in
-        Camera.main.GetComponent<CameraMovement>().MoveToNewRoom(transform.parent);
+        else
+        {
+
+
+            transform.position = currentRespawn.position;
+            playerHealth.Respawn();
+
+            //make sure the checkpoint object is a child of the room it is in
+            Camera.main.GetComponent<CameraMovement>().MoveToNewRoom(transform.parent);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -4,6 +4,19 @@ public class PlayerRespawn : MonoBehaviour
 {
     private float respawnCooldown = 1f;
     private float respawnTimer = 0f;
+
+    private void OnEnable()
+    {
+        CheckpointRespawn checkpointRespawn= GetComponent<CheckpointRespawn>();
+        if ( checkpointRespawn.currentRespawn==null)
+        {
+            checkpointRespawn.Respawn();
+            this.enabled = false;
+            return;
+        }
+        respawnTimer = respawnCooldown;
+    }
+
     private void Update()
     {
         respawnTimer -= Time.deltaTime;

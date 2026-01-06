@@ -170,9 +170,9 @@ public class RangedPatrol : MonoBehaviour
         return hit.collider != null;
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(box.bounds.center + transform.right * range * transform.localScale.x, new Vector2(box.bounds.size.x * sizeX, box.bounds.size.y * sizeY));
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawWireCube(box.bounds.center + transform.right * range * transform.localScale.x, new Vector2(box.bounds.size.x * sizeX, box.bounds.size.y * sizeY));
+    //}
 }

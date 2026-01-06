@@ -50,6 +50,7 @@ GameObject:
   - component: {fileID: 962145768615560135}
   - component: {fileID: 1264107642915598559}
   - component: {fileID: 7651304338805695400}
+  - component: {fileID: 1281741862844744818}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -193,7 +194,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 6200000, guid: 05e9fe926c4b58b469ef7ebbf10a1259, type: 2}
+  m_Material: {fileID: 6200000, guid: 5ab8088c879c7da4fa9e1fc75c9ab2c2, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -231,6 +232,8 @@ MonoBehaviour:
   wallJumpSpeedY: 10
   wallJumpTimer: 0.3
   jumpSound: {fileID: 8300000, guid: de47bc2fb002acc49b9fd3e8f5fc3061, type: 3}
+  friction: {fileID: 6200000, guid: 5ab8088c879c7da4fa9e1fc75c9ab2c2, type: 2}
+  noFriction: {fileID: 6200000, guid: 05e9fe926c4b58b469ef7ebbf10a1259, type: 2}
 --- !u!95 &4699796843383767427
 Animator:
   serializedVersion: 7
@@ -299,7 +302,6 @@ MonoBehaviour:
   components:
   - {fileID: 962145768615560135}
   - {fileID: 1081590589268467400}
-  - {fileID: 4699796843383767427}
 --- !u!114 &7651304338805695400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,6 +315,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerRespawn
   checkpointHit: {fileID: 8300000, guid: 5b770bb8a2aa06d46bcc563cdabca8a2, type: 3}
+--- !u!114 &1281741862844744818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8577850971174656263}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e7868b0423528147b36807f7abe611f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerRespawn
 --- !u!1 &8719628539113227497
 GameObject:
   m_ObjectHideFlags: 0
