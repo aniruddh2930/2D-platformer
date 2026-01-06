@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private AudioClip gameOver;
     [SerializeField] private GameObject pauseScreen;
 
+    //Game Over Screen Functions
     public void GameOver()
     {
         gameOverScreen.SetActive(true);
@@ -20,6 +21,7 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    //Shared functions
     public void MainMenu()
     {
         SceneManager.LoadScene(0);
@@ -32,6 +34,28 @@ public class UIManager : MonoBehaviour
             UnityEditor.EditorApplication.isPlaying = false;
         #endif
     }
+
+    //Pause Screen Functions
+    public void Resume()
+    {
+        PauseGame(false);
+        Time.timeScale = 1;
+    }
+
+    public void Volume()
+    {
+
+    }
+
+    public void Music()
+    {
+
+    }
+
+
+
+
+
 
     private void Update()
     {
@@ -51,5 +75,9 @@ public class UIManager : MonoBehaviour
     private void PauseGame(bool status)
     {
         pauseScreen.SetActive(status);
+        if (!status)
+            Time.timeScale = 1;
+        else
+            Time.timeScale = 0;
     }
 }
