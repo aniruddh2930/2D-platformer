@@ -8,6 +8,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private AudioClip gameOver;
     [SerializeField] private GameObject pauseScreen;
+    [SerializeField] private SoundBar soundBar;
+    [SerializeField] private GameObject Bar;
 
     //Game Over Screen Functions
     public void GameOver()
@@ -44,12 +46,14 @@ public class UIManager : MonoBehaviour
 
     public void Volume()
     {
-
+        AudioManager.instance.ChangeVolume();
+        soundBar.ChangeRect("volume");
     }
 
     public void Music()
     {
-
+        AudioManager.instance.ChangeMusic();
+        soundBar.ChangeRect("music");
     }
 
 
@@ -68,6 +72,7 @@ public class UIManager : MonoBehaviour
             else
             {
                 PauseGame(false);
+                Bar.SetActive(false);
             }
         }
 }

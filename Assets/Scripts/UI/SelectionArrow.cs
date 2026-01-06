@@ -9,22 +9,37 @@ public class SelectionArrow : MonoBehaviour
     private int currentIndex = 0;
     [SerializeField] private AudioClip move;
     [SerializeField] private AudioClip interactSound;
+    [Header ("Only for Pause Menu")]
+    [SerializeField] private GameObject soundBar;
 
     private void Awake()
     {
         rect = GetComponent<RectTransform>();
     }
 
+    private void OnEnable()
+    {
+        currentIndex = 0;
+        rect.position = new Vector2(rect.position.x, options[currentIndex].position.y);
+    }
+
+
     private void Update()
     {
         //move
         if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
         {
+            //show sound bar only on volume and music options
+            //only for pause menu
             Change(1);
+            CheckIndex();
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
+            //show sound bar only on volume and music options
+            //only for pause menu
             Change(-1);
+            CheckIndex();
         }
 
         //interact
@@ -44,10 +59,28 @@ public class SelectionArrow : MonoBehaviour
     {
         currentIndex += change;
         currentIndex= (currentIndex%options.Length+options.Length)%options.Length;
-
-        if (change!= 0)
-            AudioManager.instance.PlaySound(move);
-
+        AudioManager.instance.PlaySound(move);
         rect.position= new Vector2(rect.position.x, options[currentIndex].position.y);
+    }
+
+    private void CheckIndex()
+    {
+        if (soundBar != null)
+        {
+            if (currentIndex == 1)
+            {
+                soundBar.SetActive(true);
+                soundBar.GetComponent<SoundBar>().Move("volume");
+            }
+            else if (currentIndex == 2)
+            {
+                soundBar.SetActive(true);
+                soundBar.GetComponent<SoundBar>().Move("music");
+            }
+            else
+            {
+                soundBar.SetActive(false);
+            }
+        }
     }
 }
