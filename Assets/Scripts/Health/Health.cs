@@ -35,7 +35,6 @@ public class Health : MonoBehaviour
 
         if (currentHealth-damage > 0)
         {
-            invunerable = true;
             currentHealth -= damage;
             anim.SetTrigger("hurt");
             AudioManager.instance.PlaySound(hurt);
@@ -72,6 +71,7 @@ public class Health : MonoBehaviour
     private IEnumerator Invunerability()
     {
         //player 8 enemy 9
+        invunerable = true;
         Physics2D.IgnoreLayerCollision(8, 9,true);
         for (int i = 0; i < numberOfFlashes; i++)
         {

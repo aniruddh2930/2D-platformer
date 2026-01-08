@@ -21,8 +21,6 @@ public class CheckpointRespawn : MonoBehaviour
 
         else
         {
-
-
             transform.position = currentRespawn.position;
             playerHealth.Respawn();
 

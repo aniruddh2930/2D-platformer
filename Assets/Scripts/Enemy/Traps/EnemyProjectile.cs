@@ -8,8 +8,12 @@ public class EnemyProjectile : Damage
     private Animator anim;
     private BoxCollider2D boxCollider;
     private bool hit = false;
+
+
     [Header("only for ranged patrol")]
     [SerializeField] private Transform knight;
+    private float direction;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
@@ -22,7 +26,7 @@ public class EnemyProjectile : Damage
         if(hit)
             return;
         if(knight!=null)
-            transform.Translate(speed * Time.deltaTime*knight.localScale.x,0,0);
+            transform.Translate(speed * Time.deltaTime*direction,0,0);
         else
             transform.Translate(speed * Time.deltaTime,0,0);
         lifetime -= Time.deltaTime;  
@@ -39,7 +43,10 @@ public class EnemyProjectile : Damage
         gameObject.SetActive(true);
         boxCollider.enabled = true;
         if (knight != null)
-            transform.localScale = new Vector3(knight.localScale.x*0.7f, 0.7f, 0.7f);
+        {
+            direction = knight.localScale.x;
+            transform.localScale = new Vector3(direction * 0.7f, 0.7f, 0.7f);
+        }
         else
             transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
     }
@@ -51,7 +58,7 @@ public class EnemyProjectile : Damage
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+        if (collision.CompareTag("Enemy") || collision.CompareTag("Checkpoint"))
             return;
         hit = true;
         OnTriggerStay2D(collision);

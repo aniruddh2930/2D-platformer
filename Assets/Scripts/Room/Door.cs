@@ -2,8 +2,8 @@
 
 public class Door : MonoBehaviour
 {
-    [SerializeField] private Transform nextRoom;
-    [SerializeField] private Transform lastRoom;
+    [SerializeField] private GameObject nextRoom;
+    [SerializeField] private GameObject lastRoom;
     [SerializeField] private CameraMovement cam;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -12,13 +12,13 @@ public class Door : MonoBehaviour
         {
             nextRoom.GetComponent<Reset>().ActivateRoom(true);
             lastRoom.GetComponent<Reset>().ActivateRoom(false);
-            cam.MoveToNewRoom(nextRoom);
+            cam.MoveToNewRoom(nextRoom.transform);
         }
         else if (collision.tag == "Player" && collision.transform.position.x > transform.position.x)
         {
             nextRoom.GetComponent<Reset>().ActivateRoom(false);
             lastRoom.GetComponent<Reset>().ActivateRoom(true);
-            cam.MoveToNewRoom(lastRoom);
+            cam.MoveToNewRoom(lastRoom.transform);
         }
     }
 
