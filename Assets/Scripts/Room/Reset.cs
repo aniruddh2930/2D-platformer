@@ -16,7 +16,7 @@ public class Reset : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+ 
     public void ActivateRoom(bool status)
     {
         if (enemies.Length == 1 && enemies[0] == null)

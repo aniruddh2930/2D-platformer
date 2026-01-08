@@ -247,7 +247,9 @@ MonoBehaviour:
   hurt: {fileID: 8300000, guid: 52bafa4110ad7cc4e85eb8d75115ba07, type: 3}
   iFrameDuration: 1
   numberOfFlashes: 3
-  components: []
+  components:
+  - {fileID: 5082346663839956467}
+  - {fileID: 7473414473534206806}
 --- !u!114 &5082346663839956467
 MonoBehaviour:
   m_ObjectHideFlags: 0
