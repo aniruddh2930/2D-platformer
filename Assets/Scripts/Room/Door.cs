@@ -2,14 +2,15 @@
 
 public class Door : MonoBehaviour
 {
-    [SerializeField] private GameObject nextRoom;
     [SerializeField] private GameObject cam;
+    [SerializeField] private AudioClip cleared;
     [Header("Enemies in current room")]
     [SerializeField] private GameObject[] enemiesDead;
-    private int deadEnemies = 0;
+    private int deadEnemies;
 
     private void Update()
     {
+        deadEnemies = 0;
         foreach (GameObject enemy in enemiesDead)
         {
             if (enemy.activeInHierarchy == true)
@@ -25,26 +26,23 @@ public class Door : MonoBehaviour
     }
     private System.Collections.IEnumerator DisableDoor()
     {
-        yield return new WaitForSeconds(1f);
+        AudioManager.instance.PlaySound(cleared);
+        yield return new WaitForSeconds(5f);
         for (int i = 0; i < 10; i++)
         {
             if(i%2==0)
                 cam.transform.Translate(new Vector3(-1,0,0));
             else
                 cam.transform.Translate(new Vector3(1,0,0));
-            transform.Translate(new Vector3(0,-0.5f, 0));
+            transform.GetChild(1).transform.Translate(new Vector3(0,-1,0));
             yield return new WaitForSeconds(0.1f);
         }
-        gameObject.GetComponent<SpriteRenderer>().enabled = false;
-        gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    { 
-        if (collision.tag == "Player")
+        transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = false;
+        foreach( Transform child in transform)
         {
-            nextRoom.GetComponent<Reset>().ActivateRoom(true);
-            gameObject.SetActive(false);
+            child.GetComponent<BoxCollider2D>().enabled = !child.GetComponent<BoxCollider2D>().enabled;
         }
     }
+    
 
 }

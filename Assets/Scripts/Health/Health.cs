@@ -11,6 +11,7 @@ public class Health : MonoBehaviour
     private Animator anim;
     private bool dead = false;
     private bool invunerable = false;
+    private bool isEnemy = false;
     [SerializeField] private AudioClip death;
     [SerializeField] private AudioClip hurt;
 
@@ -50,10 +51,24 @@ public class Health : MonoBehaviour
 
             foreach (Behaviour component in components)
             {
+                if (component.name=="Knight")
+                {
+                    isEnemy = true;
+                }
                 component.enabled = false;
             }
-            StartCoroutine(EnableRespawn());
+            if(!isEnemy)
+            {
+                StartCoroutine(EnableRespawn());
+            }
         }
+
+    }
+
+    private IEnumerator DespawnEnemy()
+    {
+        yield return new WaitForSeconds(1);
+        gameObject.SetActive(false);
 
     }
 
@@ -92,9 +107,10 @@ public class Health : MonoBehaviour
         anim.Play("Player_respawn");
     }
 
+    //animation event
     private void Deactivate()
     {
-        gameObject.SetActive(false);
+        transform.parent.gameObject.SetActive(false);
     }
 
     //called by Player_respawn animation event
