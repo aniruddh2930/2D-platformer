@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private AudioClip gameOver;
     [SerializeField] private GameObject pauseScreen;
+    [SerializeField] private GameObject finishScreen;
     [SerializeField] private SoundBar soundBar;
     [SerializeField] private GameObject Bar;
 
@@ -66,7 +67,7 @@ public class UIManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (!pauseScreen.activeInHierarchy && !gameOverScreen.activeInHierarchy)
+            if (!pauseScreen.activeInHierarchy && !gameOverScreen.activeInHierarchy && !finishScreen.activeInHierarchy)
             {
                 PauseGame(true);
             }

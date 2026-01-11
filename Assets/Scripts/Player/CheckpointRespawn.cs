@@ -6,6 +6,7 @@ public class CheckpointRespawn : MonoBehaviour
     public Transform currentRespawn { get; private set; }
     private Health playerHealth;
     private UIManager uiManager;
+    [SerializeField] Vessel vessel;
 
     private void Awake()
     {

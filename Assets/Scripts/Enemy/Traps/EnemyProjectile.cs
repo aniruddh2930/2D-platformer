@@ -58,7 +58,7 @@ public class EnemyProjectile : Damage
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy") || collision.CompareTag("Checkpoint"))
+        if (collision.CompareTag("Enemy") || collision.CompareTag("Checkpoint") || collision.CompareTag("Hidden"))
             return;
         hit = true;
         OnTriggerStay2D(collision);

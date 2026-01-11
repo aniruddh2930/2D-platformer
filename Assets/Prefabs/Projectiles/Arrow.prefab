@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: -4929766352475501321}
   - component: {fileID: 3518397971308003979}
   - component: {fileID: -2869592824714193371}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Arrow
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -154,6 +154,7 @@ MonoBehaviour:
   damage: 1
   speed: 12
   resetTime: 10
+  knight: {fileID: 0}
 --- !u!50 &-2869592824714193371
 Rigidbody2D:
   serializedVersion: 5

@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FireTrap : MonoBehaviour
 {
     [SerializeField] private float damage;
     [SerializeField] private GameObject fireHitbox;
+    [Header("lifetime before object dies")]
+    [SerializeField] private float lifeTime;
+    [SerializeField] private Behaviour[] behaviours;
+    [SerializeField] private Health playerHealth;
     [Header("Fire trap timer")]
     [SerializeField] private float activationDelay;
     [SerializeField] private float activeTime;
@@ -61,5 +66,24 @@ public class FireTrap : MonoBehaviour
         anim.SetBool("fire", false);
         fireHitbox.SetActive(false);
         triggered = false;
+    }
+
+    private void Update()
+    {
+        if (!playerHealth.dead)
+        {
+            lifeTime -= Time.deltaTime;
+            if (lifeTime < 0)
+                Deactivate();
+        }
+    }
+
+    private void Deactivate()
+    {
+      this.enabled= false;
+      foreach (Behaviour component in behaviours)
+        {
+            component.enabled = false;
+        }
     }
 }

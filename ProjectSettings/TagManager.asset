@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - FireTrap
   - Checkpoint
+  - Projectile
   layers:
   - Default
   - TransparentFX

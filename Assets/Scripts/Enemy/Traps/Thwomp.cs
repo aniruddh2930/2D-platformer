@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Unity.InferenceEngine;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class Thwomp : Damage
     [SerializeField] private float speed;
     [SerializeField] private float range;
     [SerializeField] private float checkDelay;
+    [SerializeField] private Health playerHealth;
     private float checkTimer;
     private Vector2 destination;
     private bool attacking;
@@ -15,11 +17,17 @@ public class Thwomp : Damage
     private Vector2 startPos;
     private Animator anim;
     private BoxCollider2D box;
+    private ThwompPatrol patrol;
 
+    [Header("life time before enemy dies")]
+    [SerializeField] private float lifetime;
+    [SerializeField] private  Behaviour[] behaviours;
     private Vector3[] directions= new Vector3[4];
 
     [Header("SFX")]
     [SerializeField] private AudioClip thwompSound;
+
+  
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
@@ -32,14 +40,26 @@ public class Thwomp : Damage
         startPos = transform.position;
         anim = GetComponent<Animator>();
         box = GetComponent<BoxCollider2D>();
+        patrol=GetComponent<ThwompPatrol>();
     }
 
-    // Update is called once per frame
-    void Update()
+   
+
+        // Update is called once per frame
+        void Update()
     {
+        if (!playerHealth.dead)
+        {
+            lifetime -= Time.deltaTime;
+            if (lifetime <= 0)
+                Deactivate();
+        }
+
         if (attacking)
         {
             //times 50 so speed doesnt seem to large
+            box.enabled = true;
+            patrol.enabled = false;
             rb.linearVelocity = destination.normalized*speed;
             CheckDistance();
         }
@@ -49,6 +69,10 @@ public class Thwomp : Damage
             if (checkTimer <= 0)
             {
                 CheckForPlayer();
+                if (!attacking)
+                {
+                    patrol.enabled = true;
+                }
             }
         }
     }
@@ -66,7 +90,7 @@ public class Thwomp : Damage
     {
         for (int i=0;i<directions.Length;i++)
         {
-            RaycastHit2D hit = Physics2D.BoxCast(transform.position, box.bounds.size,transform.rotation.z, directions[i],range,playerMask);
+            RaycastHit2D hit = Physics2D.BoxCast(transform.position, patrol.size,transform.rotation.z, directions[i],range,playerMask);
             if (hit.collider != null)
              {
                 destination = directions[i];
@@ -79,8 +103,9 @@ public class Thwomp : Damage
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        if (collision.CompareTag("Projectile"))
+            return;
         base.OnTriggerStay2D(collision);
-
         //offset getting stuck in walls etc
         if(destination==Vector2.right)
         {
@@ -114,10 +139,14 @@ public class Thwomp : Damage
                 transform.Translate(0, 0.2f, 0);
             }
         }
-        AudioManager.instance.PlaySound(thwompSound);
         Stop();
     }
 
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        AudioManager.instance.PlaySound(thwompSound);
+    }
 
     private void Stop()
     {
@@ -131,12 +160,23 @@ public class Thwomp : Damage
         Stop();
     }
 
+    private void Deactivate()
+    {
+        Stop();
+        this.enabled = false;
+        foreach (Behaviour component in behaviours)
+        {
+            component.enabled = false;
+        }
+        gameObject.SetActive(false);
+    }
+
     //Debugging purposes
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawWireCube(box.bounds.center, new Vector2(2*range, box.bounds.size.y));
-    //    Gizmos.DrawWireCube(box.bounds.center, new Vector2(box.bounds.size.x, 2*range));
-    //}
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, new Vector2(2 * range, patrol.size.y));
+        Gizmos.DrawWireCube(transform.position, new Vector2(patrol.size.x, 2 * range));
+    }
 }
 

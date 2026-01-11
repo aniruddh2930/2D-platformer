@@ -46,7 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ffe944d328b3dd4d9900a7e9b56f733, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Door
-  nextRoom: {fileID: 0}
   cam: {fileID: 0}
   cleared: {fileID: 8300000, guid: 5b770bb8a2aa06d46bcc563cdabca8a2, type: 3}
   enemiesDead: []
@@ -59,8 +58,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1877083190170210092}
-  - component: {fileID: 9005216256022615070}
   - component: {fileID: 2139736472172413503}
+  - component: {fileID: 5899566874583690014}
   m_Layer: 0
   m_Name: DoorCollider
   m_TagString: Untagged
@@ -83,14 +82,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2652340371765753605}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &9005216256022615070
-BoxCollider2D:
+--- !u!114 &2139736472172413503
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5336101692965617535}
-  m_Enabled: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 654965ac69786f247af45e88a1cd804d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DoorCollider
+  nextRoom: {fileID: 0}
+  door: {fileID: 1306625201423117859}
+--- !u!68 &5899566874583690014
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5336101692965617535}
+  m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -117,31 +130,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.034383774}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1, y: 3.1317945}
+  m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
---- !u!114 &2139736472172413503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5336101692965617535}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 654965ac69786f247af45e88a1cd804d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DoorCollider
-  nextRoom: {fileID: 0}
+  m_Points:
+  - {x: 0.14117813, y: 2.850227}
+  - {x: 0.75403214, y: 2.8328555}
+  - {x: 2.146288, y: 2.780782}
+  - {x: 2.14505, y: -1.7812687}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!1 &6834194933005995596
 GameObject:
   m_ObjectHideFlags: 0

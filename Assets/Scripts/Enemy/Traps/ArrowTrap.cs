@@ -6,6 +6,10 @@ public class ArrowTrap : MonoBehaviour
     [SerializeField] private GameObject[] arrows;
     [SerializeField] private Transform firePoint;
     [SerializeField] private AudioClip arrowSound;
+    [Header("lifetime duration")]
+    [SerializeField] private Component[] behaviours;
+    [SerializeField] private float lifeTime;
+    [SerializeField] private Health playerHealth;
 
     private float coolDown;
 
@@ -33,10 +37,31 @@ public class ArrowTrap : MonoBehaviour
 
     private void Update()
     {
+        if (!playerHealth.dead)
+        {
+            lifeTime -= Time.deltaTime;
+            if (lifeTime < 0)
+                Deactivate();
+        }
+
         coolDown -= Time.deltaTime;
         if (coolDown <= 0)
         {
               Attack();
         }
     }
+
+    private void Deactivate()
+    {
+        this.enabled= false;
+        foreach (Behaviour component in behaviours)
+        {
+            component.enabled = false;
+        }
+
+    }
+
+
+
+
 }

@@ -7,11 +7,13 @@ public class Health : MonoBehaviour
 {
     [Header("Health")]
     [SerializeField] private float maxHealth;
+    [SerializeField] private Vessel vessel;
     public float currentHealth { get; private set; }
     private Animator anim;
-    private bool dead = false;
+    public bool dead { get; private set; } = false;
     private bool invunerable = false;
     private bool isEnemy = false;
+    [Header("SFX")]
     [SerializeField] private AudioClip death;
     [SerializeField] private AudioClip hurt;
 
@@ -74,8 +76,9 @@ public class Health : MonoBehaviour
 
     private IEnumerator EnableRespawn()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(0.6f);
         GetComponent<PlayerRespawn>().enabled = true;
+        vessel.loseLife();
     }
 
     public void AddHealth(float regen)
@@ -101,7 +104,6 @@ public class Health : MonoBehaviour
 
     public void Respawn()
     {
-        dead = false;
         AddHealth(maxHealth);
         GetComponent<Animator>().SetBool("grounded", true);
         anim.Play("Player_respawn");
@@ -121,6 +123,7 @@ public class Health : MonoBehaviour
             component.enabled = true;
         }
         StartCoroutine(Invunerability());
+        dead = false;
     }
 }
 

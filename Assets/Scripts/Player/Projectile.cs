@@ -52,7 +52,7 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") || collision.CompareTag("Checkpoint"))
+        if (collision.CompareTag("Player") || collision.CompareTag("Checkpoint") || collision.CompareTag("Hidden")) 
             return;
         hit = true;
         if (collision.CompareTag("Enemy"))

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3939341622201591343}
   m_Layer: 0
   m_Name: Fire Hitbox
-  m_TagString: Untagged
+  m_TagString: Hidden
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -201,6 +201,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FireTrap
   damage: 1
   fireHitbox: {fileID: 93398599989325546}
+  lifeTime: 60
+  behaviours:
+  - {fileID: 1005754717422895021}
+  playerHealth: {fileID: 0}
   activationDelay: 1
   activeTime: 2
   fireTrapSound: {fileID: 8300000, guid: ca3737e7881ef9849bce56e8327362fb, type: 3}
