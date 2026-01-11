@@ -46,6 +46,7 @@ public class Health : MonoBehaviour
         else 
         {
             currentHealth = 0;
+            GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
             GetComponent<Animator>().SetBool("grounded", true);
             anim.SetTrigger("die");
             AudioManager.instance.PlaySound(death);
