@@ -57,7 +57,6 @@ public class Thwomp : Damage
 
         if (attacking)
         {
-            //times 50 so speed doesnt seem to large
             box.enabled = true;
             patrol.enabled = false;
             rb.linearVelocity = destination.normalized*speed;

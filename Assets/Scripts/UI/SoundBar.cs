@@ -1,9 +1,10 @@
 using UnityEngine.UI;
 using UnityEngine;
+using System.Dynamic;
 
 public class SoundBar : MonoBehaviour
 {
-    public RectTransform rectTransform;
+    private RectTransform rectTransform;
     [Header("Sound Bar Settings")]
     [SerializeField] private float maxWidth;
     [SerializeField] private Image soundBar;
@@ -11,6 +12,11 @@ public class SoundBar : MonoBehaviour
     [Header("Transforms")]
     [SerializeField] private Transform volume;
     [SerializeField] private Transform music;
+
+    private void Awake()
+    {
+       rectTransform = GetComponent<RectTransform>();   
+    }
 
 
     private void SetVolume()
@@ -45,6 +51,7 @@ public class SoundBar : MonoBehaviour
         }
     }
 
+    //moves the sound bar to the correct position and changes the size of the sound bar based on the current volume or music
     public void Move(string location)
     {
         if (location == "volume")
@@ -61,6 +68,7 @@ public class SoundBar : MonoBehaviour
         }
     }
 
+    //used by uimanager changes size and if neccessary color of the sound bar when the volume or music is changed
     public void ChangeRect(string location)
     {
         ChangeSize(location);

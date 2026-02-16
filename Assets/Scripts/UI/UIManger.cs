@@ -11,7 +11,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject finishScreen;
     [SerializeField] private SoundBar soundBar;
     [SerializeField] private GameObject Bar;
+    [SerializeField] private SelectionArrow selectionArrow;
 
+    public static float start = 0.0f;
+
+    private void Start()
+    {
+        start=Time.time;
+    }
     //Game Over Screen Functions
     public void GameOver()
     {
@@ -43,25 +50,23 @@ public class UIManager : MonoBehaviour
     public void Resume()
     {
         PauseGame(false);
+        Bar.SetActive(false);
         Time.timeScale = 1;
     }
 
     public void Volume()
     {
+        selectionArrow.SetIndex(1);
         AudioManager.instance.ChangeVolume();
         soundBar.ChangeRect("volume");
     }
 
     public void Music()
     {
+        selectionArrow.SetIndex(2);
         AudioManager.instance.ChangeMusic();
         soundBar.ChangeRect("music");
     }
-
-
-
-
-
 
     private void Update()
     {
@@ -87,4 +92,5 @@ public class UIManager : MonoBehaviour
         else
             Time.timeScale = 0;
     }
+
 }

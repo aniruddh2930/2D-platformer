@@ -5,6 +5,7 @@ public class AudioManager : MonoBehaviour
 {
     private AudioSource source;
     private AudioSource musicSource;
+    private string currentUsername;
     public static AudioManager instance;
     public float currentVolume { get;private set; }
     public float currentMusic { get; private set; }
@@ -16,14 +17,6 @@ public class AudioManager : MonoBehaviour
 
     void Awake()
     {
-        source = GetComponent<AudioSource>();
-        musicSource = transform.GetChild(0).GetComponent<AudioSource>();
-        currentMusic = PlayerPrefs.GetFloat("Music", maxMusic);
-        currentVolume = PlayerPrefs.GetFloat("Volume", maxVolume);
-        changeMusic = changeMusic*maxMusic;
-        changeVolume = changeVolume*maxVolume;
-        musicSource.volume = currentMusic;
-        source.volume = currentVolume;
         if (instance == null)
         {
             instance = this;
@@ -34,9 +27,20 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+        source = GetComponent<AudioSource>();
+        musicSource = transform.GetChild(0).GetComponent<AudioSource>();
+        changeMusic = changeMusic*maxMusic;
+        changeVolume = changeVolume*maxVolume;
     }
 
-
+    public void SetSound()
+    {
+        currentUsername = Accounts.instance.currentUsername;
+        currentMusic = PlayerPrefs.GetFloat(Accounts.instance.GetMusicID(currentUsername), maxMusic);
+        currentVolume = PlayerPrefs.GetFloat(Accounts.instance.GetVolumeID(currentUsername), maxVolume);
+        musicSource.volume = currentMusic;
+        source.volume = currentVolume;
+    }
 
     public void PlaySound(AudioClip clip)
     {
@@ -53,7 +57,8 @@ public class AudioManager : MonoBehaviour
             currentMusic = 0f;
         }
         musicSource.volume = currentMusic;
-        PlayerPrefs.SetFloat("Music", currentMusic);
+        currentUsername = Accounts.instance.currentUsername;
+        PlayerPrefs.SetFloat(Accounts.instance.GetMusicID(currentUsername), currentMusic);
     }
 
     public void ChangeVolume()
@@ -65,6 +70,7 @@ public class AudioManager : MonoBehaviour
             currentVolume = 0f;
         }
         source.volume = currentVolume;
-        PlayerPrefs.SetFloat("Volume", currentVolume);
+        currentUsername = Accounts.instance.currentUsername;
+        PlayerPrefs.SetFloat(Accounts.instance.GetVolumeID(currentUsername), currentVolume);
     }
 }

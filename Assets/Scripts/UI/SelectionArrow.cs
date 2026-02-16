@@ -57,6 +57,11 @@ public class SelectionArrow : MonoBehaviour
 
     private void Change(int change)
     {
+        if (change==0)
+        {
+            rect.position = new Vector2(rect.position.x, options[currentIndex].position.y);
+            return;
+        }
         currentIndex += change;
         currentIndex= (currentIndex%options.Length+options.Length)%options.Length;
         AudioManager.instance.PlaySound(move);
@@ -82,5 +87,12 @@ public class SelectionArrow : MonoBehaviour
                 soundBar.SetActive(false);
             }
         }
+    }
+
+    public void SetIndex(int index)
+    {
+        currentIndex = index;
+        Change(0);
+        CheckIndex();
     }
 }
