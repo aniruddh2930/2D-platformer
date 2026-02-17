@@ -82,7 +82,7 @@ public class UIManager : MonoBehaviour
                 Bar.SetActive(false);
             }
         }
-}
+    }
 
     private void PauseGame(bool status)
     {
