@@ -42,11 +42,6 @@ public class SelectingText : MonoBehaviour
            options[currentIndex].GetComponent<Button>().onClick.Invoke();
        }
 
-       else if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Return))
-       {
-            AudioManager.instance.PlaySound(clickSound);
-            options[currentIndex].GetComponent<Button>().onClick.Invoke();
-       }
     }
 
     private int ChangeIndex(int change)

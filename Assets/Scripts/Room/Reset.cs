@@ -26,7 +26,7 @@ public class Reset : MonoBehaviour
         {
             if (enemiesAndDoor[i] != null)
                 enemiesAndDoor[i].SetActive(status);
-                enemiesAndDoor[i].transform.position = initialPositions[i];
+            enemiesAndDoor[i].transform.position = initialPositions[i];
         }
     }
 }
