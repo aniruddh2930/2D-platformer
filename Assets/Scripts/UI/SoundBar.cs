@@ -86,6 +86,7 @@ public class SoundBar : MonoBehaviour
     {
         if( location == "music")
         {
+            // 0.3 is max background sound
             float newWidth = (maxWidth / 0.3f) * AudioManager.instance.currentMusic;
             if (newWidth == 0)
             {
@@ -96,7 +97,6 @@ public class SoundBar : MonoBehaviour
         }
         else
         {
-
             float newWidth = maxWidth * AudioManager.instance.currentVolume;
             if (newWidth == 0)
             {
