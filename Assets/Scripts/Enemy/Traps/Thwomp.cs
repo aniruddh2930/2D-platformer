@@ -87,14 +87,17 @@ public class Thwomp : Damage
 
     private void CheckForPlayer()
     {
-        for (int i=0;i<directions.Length;i++)
+        if (!playerHealth.dead)
         {
-            RaycastHit2D hit = Physics2D.BoxCast(transform.position, patrol.size,transform.rotation.z, directions[i],range,playerMask);
-            if (hit.collider != null)
-             {
-                destination = directions[i];
-                attacking = true;
-                checkTimer = checkDelay;
+            for (int i = 0; i < directions.Length; i++)
+            {
+                RaycastHit2D hit = Physics2D.BoxCast(transform.position, patrol.size, transform.rotation.z, directions[i], range, playerMask);
+                if (hit.collider != null)
+                {
+                    destination = directions[i];
+                    attacking = true;
+                    checkTimer = checkDelay;
+                }
             }
         }
     }
