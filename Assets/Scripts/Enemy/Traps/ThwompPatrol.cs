@@ -31,7 +31,6 @@ public class ThwompPatrol : MonoBehaviour
             return;
         if (Vector2.Distance(nextPatrolPoint.position, transform.position) < 0.1f)
         {
-            box.enabled = true;
             waiting = true;
             rb.linearVelocity = Vector2.zero;
             currentPatrolPoint = (currentPatrolPoint + 1) % 4;
