@@ -102,10 +102,12 @@ public class UsernameAndPassword : MonoBehaviour
     {
         if (password.Length == 0)
         {
+            isPasswordValid = false;
             return;
         }
         if (password.Length < 8)
         {
+            isPasswordValid = false;
             passwordWarning.text="Password must be at least 8 characters long.";
         }
         else
