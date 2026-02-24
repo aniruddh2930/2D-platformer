@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 3581168066293506696}
   m_Layer: 9
   m_Name: Thwomp
-  m_TagString: Enemy
+  m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -263,6 +263,8 @@ MonoBehaviour:
   patrolPoint4: {fileID: 2126601967525418271}
   speed: 3
   delay: 2
+  center: {x: 0, y: 0}
+  size: {x: 0, y: 0}
 --- !u!1 &3467966702203685339
 GameObject:
   m_ObjectHideFlags: 0

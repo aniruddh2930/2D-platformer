@@ -9,6 +9,8 @@ TagManager:
   - FireTrap
   - Checkpoint
   - Projectile
+  - Hidden
+  - Trap
   layers:
   - Default
   - TransparentFX
