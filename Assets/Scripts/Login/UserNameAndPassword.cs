@@ -39,68 +39,61 @@ public class UsernameAndPassword : MonoBehaviour
     {
         if (username.Length == 0)
         {
+            isUsernameValid = false;
+            return;
+        }
+        else if (username.Length < 3)
+        {
+            isUsernameValid = false;
+            usernameWarning.text = "Username must be at least 3 characters long.";
             return;
         }
         if (isLogingin)
         { 
-            if (username.Length < 3)
+            if (Accounts.instance.CheckUsername(username))
             {
-                usernameWarning.text = "Username must be at least 3 characters long.";
-            }
-            else
-            {
-                if (Accounts.instance.CheckUsername(username))
+                if (isPasswordValid)
                 {
-                    if (isPasswordValid)
-                    {
-                        OpenMainMenu();
-                        Debug.Log("Login successful!");
-                    }
-                    else
-                    {
-                        Debug.Log("Username is valid.");
-                        usernameWarning.text = "";
-                        isUsernameValid = true;
-                        passwordInput.ActivateInputField();
-                    }
+                    OpenMainMenu();
+                    Debug.Log("Login successful!");
                 }
                 else
                 {
-                    usernameWarning.text = "Username does not exist. Please create an account.";
-                    isUsernameValid = false;
+                    Debug.Log("Username is valid.");
+                    usernameWarning.text = "";
+                    isUsernameValid = true;
+                    passwordInput.ActivateInputField();
                 }
+            }
+            else
+            {
+                usernameWarning.text = "Username does not exist. Please create an account.";
+                isUsernameValid = false;
             }
         }
         else
         {
-            if (username.Length < 3)
+            if (!Accounts.instance.CheckUsername(username))
             {
-                usernameWarning.text = "Username must be at least 3 characters long.";
-            }
-            else
-            {
-                if (!Accounts.instance.CheckUsername(username))
+                if (isPasswordValid)
                 {
-                    if (isPasswordValid)
-                    {
-                        usernameWarning.text = "";
-                        Accounts.instance.CreateAccount(username, passwordInput.text);
-                        OpenMainMenu();
-                        Debug.Log("Login successful!");
-                    }
-                    else
-                    {
-                        Debug.Log("Username is valid.");
-                        isUsernameValid = true;
-                        usernameWarning.text = "";
-                        passwordInput.ActivateInputField();
-                    }
+                    usernameWarning.text = "";
+                    Accounts.instance.CreateAccount(username, passwordInput.text);
+                    OpenMainMenu();
+                    Debug.Log("Login successful!");
                 }
                 else
                 {
-                    usernameWarning.text = "Username does exist. Please try another name.";
-                    isUsernameValid = false;
+                    Debug.Log("Username is valid.");
+                    isUsernameValid = true;
+                    usernameWarning.text = "";
+                    passwordInput.ActivateInputField();
                 }
+            }
+            else
+            {
+                usernameWarning.text = "Username does exist. Please try another name.";
+                isUsernameValid = false;
             }
         }
     }
