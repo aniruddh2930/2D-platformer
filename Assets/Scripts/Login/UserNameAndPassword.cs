@@ -59,6 +59,7 @@ public class UsernameAndPassword : MonoBehaviour
                     else
                     {
                         Debug.Log("Username is valid.");
+                        usernameWarning.text = "";
                         isUsernameValid = true;
                         passwordInput.ActivateInputField();
                     }
