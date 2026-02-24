@@ -99,9 +99,9 @@ public class Health : MonoBehaviour
             sprite.color = Color.white;
             yield return new WaitForSeconds(iFrameDuration/(numberOfFlashes*2));
         }
-        if (gameObject.name== "ranged_knight")
+        if (gameObject.name== "Ranged_Knight")
         {
-            sprite.color = new Color(1, 0, 0, 0.7f);
+            sprite.color = new Color(0.9433962f, 0.3960484f, 0.3960484f);
         }
         Physics2D.IgnoreLayerCollision(8, 9, false);
         invunerable = false;

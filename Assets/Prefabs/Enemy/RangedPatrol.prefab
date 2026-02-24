@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 3733865409959277890}
   - component: {fileID: 315292224965856567}
   m_Layer: 9
-  m_Name: Knight
+  m_Name: Ranged_Knight
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -300,6 +300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   maxHealth: 3
+  vessel: {fileID: 0}
   death: {fileID: 8300000, guid: d9e7c95d4359ff24a8e425733fa19955, type: 3}
   hurt: {fileID: 8300000, guid: 52bafa4110ad7cc4e85eb8d75115ba07, type: 3}
   iFrameDuration: 1
