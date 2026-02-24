@@ -54,7 +54,7 @@ public class Health : MonoBehaviour
 
             foreach (Behaviour component in components)
             {
-                if (component.name=="Knight")
+                if (!(component.name=="Player"))
                 {
                     isEnemy = true;
                 }
