@@ -126,24 +126,22 @@ public class UsernameAndPassword : MonoBehaviour
                 }
                 else
                 {
-                    if (isUsernameValid)
+                    if (PlayerPrefs.GetString(usernameInput.text) == password)
                     {
-                        if (PlayerPrefs.GetString(usernameInput.text) == password)
-                        {
-                            OpenMainMenu();
-                            Debug.Log("Login successful!");
-                        }
-                        else
-                        {
-                            passwordWarning.text = "Incorrect password. Please try again.";
-                            isPasswordValid = false;
-                        }
+                        OpenMainMenu();
+                        Debug.Log("Login successful!");
+                    }
+                    else
+                    {
+                        passwordWarning.text = "Incorrect password. Please try again.";
+                        isPasswordValid = false;
                     }
                 }
             }
             else
             {
                 usernameWarning.text = "Please enter a valid username.";
+                passwordWarning.text = "";
                 isPasswordValid = false;
             }
         }
